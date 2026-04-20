@@ -48,15 +48,17 @@
 
 /* Keep 3-level list hierarchy clearly visible in content pages. */
 .md-typeset ul {
-  list-style-type: disc;
+  list-style-type: disc !important;
 }
 
 .md-typeset ul ul {
-  margin-left: 1.25rem;
-  list-style-type: circle;
+  list-style-type: circle !important;
+  padding-inline-start: 1.4rem !important;
 }
 
 .md-typeset ul ul ul {
-  margin-left: 1.25rem;
-  list-style-type: square;
+  list-style-type: square !important;
+  padding-inline-start: 1.6rem !important;
+  margin-left: 0.2rem;
+  border-left: 2px solid rgba(127, 127, 127, 0.35);
 }
