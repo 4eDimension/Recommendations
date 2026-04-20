@@ -45,3 +45,18 @@
     right: 10px;
   }
 }
+
+/* Keep 3-level list hierarchy clearly visible in content pages. */
+.md-typeset ul {
+  list-style-type: disc;
+}
+
+.md-typeset ul ul {
+  margin-left: 1.25rem;
+  list-style-type: circle;
+}
+
+.md-typeset ul ul ul {
+  margin-left: 1.25rem;
+  list-style-type: square;
+}
