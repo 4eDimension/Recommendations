@@ -1,0 +1,272 @@
+#!/usr/bin/env python3
+"""Regenerate the Recommendations MkDocs site from a DOCX source.
+
+Pipeline:
+1. Convert DOCX to markdown with pandoc and extract media.
+2. Split markdown into chapter files using a fixed chapter list.
+3. Normalize known pandoc artifacts (underline markers and escaped apostrophes).
+4. Regenerate mkdocs.yml navigation from chapter list.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import shutil
+import subprocess
+import sys
+import unicodedata
+from pathlib import Path
+
+
+CHAPTER_TITLES = [
+    "Introduction",
+    "Recommandations générales",
+    "Numéros de port",
+    "Processeur",
+    "Système d'exploitation",
+    "Mémoire",
+    "Disque dur",
+    "Sauvegarde / Opérations de maintenance",
+    "Réseau",
+    "Web",
+    "Machine physique ou virtuelle",
+    "Marque / Modèle de machine",
+    "Tests / Recette / Déploiement",
+    "Propriétés de la base",
+    "Général",
+    "Compilateur",
+    "Base de données / Stockage des données",
+    "Base de données / Mémoire",
+    "Sauvegarde / Périodicité",
+    "Sauvegarde / Configuration",
+    "Sauvegarde / Sauvegarde & restitution",
+    "Client-Serveur / Option réseau",
+    "Client-Serveur / Configuration IP",
+    "Web / Configuration",
+    "Web / Options (I)",
+    "Web / Options (II)",
+    "Compatibilité",
+    "Sécurité",
+    "4D Server",
+    "Serveur Web",
+    "Serveur SOAP",
+    "Serveur SQL",
+    "Système de mot de passe 4D",
+    "Mécanisme de mise à jour logicielle",
+    "Système de sauvegarde et de journalisation",
+    "Protection additionnelle",
+    "Surveillance du serveur",
+]
+
+
+def normalize_text(value: str) -> str:
+    value = value.replace("’", "'").replace("`", "'")
+    value = "".join(
+        ch for ch in unicodedata.normalize("NFD", value) if unicodedata.category(ch) != "Mn"
+    )
+    value = re.sub(r"\s+", " ", value.lower().strip())
+    return value
+
+
+def slugify(value: str) -> str:
+    value = normalize_text(value).replace("'", "")
+    value = re.sub(r"[^a-z0-9]+", "-", value).strip("-")
+    return value or "chapitre"
+
+
+def run_pandoc(source_docx: Path, raw_markdown: Path, docs_assets: Path) -> None:
+    if shutil.which("pandoc") is None:
+        raise RuntimeError("pandoc is not installed or not found in PATH")
+
+    docs_assets.mkdir(parents=True, exist_ok=True)
+    command = [
+        "pandoc",
+        str(source_docx),
+        "--extract-media",
+        str(docs_assets),
+        "-t",
+        "markdown",
+        "-o",
+        str(raw_markdown),
+    ]
+    subprocess.run(command, check=True)
+
+
+def collect_boundaries(lines: list[str]) -> list[tuple[int, str]]:
+    heading_re = re.compile(r"^(#{1,6})\s*(.*)$")
+    title_lookup = {normalize_text(title): title for title in CHAPTER_TITLES}
+
+    boundaries: list[tuple[int, str]] = []
+    for idx, line in enumerate(lines):
+        match = heading_re.match(line)
+        if not match:
+            continue
+        title = match.group(2).strip()
+        if not title:
+            continue
+
+        normalized = normalize_text(title)
+        if normalized == normalize_text("Table des matières"):
+            continue
+        if normalized in title_lookup:
+            boundaries.append((idx, title_lookup[normalized]))
+
+    dedup: dict[str, tuple[int, str]] = {}
+    for idx, title in boundaries:
+        normalized = normalize_text(title)
+        if normalized not in dedup:
+            dedup[normalized] = (idx, title)
+
+    ordered: list[tuple[int, str]] = []
+    missing: list[str] = []
+    for title in CHAPTER_TITLES:
+        normalized = normalize_text(title)
+        entry = dedup.get(normalized)
+        if entry is None:
+            missing.append(title)
+        else:
+            ordered.append(entry)
+
+    if missing:
+        raise RuntimeError(
+            "Missing chapter headings in converted markdown: " + ", ".join(missing)
+        )
+
+    return ordered
+
+
+def clean_chapter_content(text: str) -> tuple[str, int, int]:
+    # Convert [text]{.underline} into HTML underline for MkDocs rendering.
+    underline_pat = re.compile(r"\[(.*?)\]\{\.underline\}")
+    text, underline_count = underline_pat.subn(r"<u>\1</u>", text)
+
+    # Remove escaped apostrophes introduced by pandoc export.
+    apostrophe_count = text.count("\\'")
+    text = text.replace("\\'", "'")
+
+    # Fix image paths from docs/chapitres/*.md
+    text = text.replace("(docs/assets/", "(../assets/")
+    text = text.replace("](docs/assets/", "](../assets/")
+    text = text.replace('"docs/assets/', '"../assets/')
+
+    return text, underline_count, apostrophe_count
+
+
+def write_chapters(lines: list[str], boundaries: list[tuple[int, str]], chapters_dir: Path) -> tuple[list[tuple[str, str]], int, int]:
+    if chapters_dir.exists():
+        for file in chapters_dir.glob("*.md"):
+            file.unlink()
+    else:
+        chapters_dir.mkdir(parents=True, exist_ok=True)
+
+    chapter_files: list[tuple[str, str]] = []
+    total_underline = 0
+    total_apostrophes = 0
+
+    for index, (start, title) in enumerate(boundaries):
+        end = boundaries[index + 1][0] if index + 1 < len(boundaries) else len(lines)
+        chunk = "\n".join(lines[start:end]).rstrip() + "\n"
+
+        chunk, underline_count, apostrophe_count = clean_chapter_content(chunk)
+        total_underline += underline_count
+        total_apostrophes += apostrophe_count
+
+        filename = f"{index + 1:02d}-{slugify(title)}.md"
+        chapter_path = chapters_dir / filename
+        chapter_path.write_text(chunk, encoding="utf-8")
+        chapter_files.append((title, f"chapitres/{filename}"))
+
+    return chapter_files, total_underline, total_apostrophes
+
+
+def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]]) -> None:
+    nav_lines = [
+        'site_name: "Préconisations 4D"',
+        'site_description: "Guide de préconisations 4D"',
+        "docs_dir: docs",
+        "theme:",
+        "  name: material",
+        "  language: fr",
+        "  palette:",
+        "    - scheme: default",
+        "      primary: blue",
+        "      accent: light blue",
+        "  features:",
+        "    - navigation.sections",
+        "    - navigation.top",
+        "    - content.code.copy",
+        "markdown_extensions:",
+        "  - toc:",
+        "      permalink: true",
+        "  - attr_list",
+        "  - admonition",
+        "  - tables",
+        "nav:",
+    ]
+
+    for title, relative_path in chapter_files:
+        nav_lines.append(f'  - "{title}": {relative_path}')
+
+    mkdocs_path.write_text("\n".join(nav_lines) + "\n", encoding="utf-8")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Regenerate docs/chapitres and mkdocs.yml from a DOCX file."
+    )
+    parser.add_argument(
+        "--source-docx",
+        required=True,
+        help="Path to the source .docx file",
+    )
+    parser.add_argument(
+        "--repo-root",
+        default=".",
+        help="Repository root (default: current directory)",
+    )
+    parser.add_argument(
+        "--raw-markdown",
+        default="/tmp/recommendations_raw.md",
+        help="Temporary markdown output path (default: /tmp/recommendations_raw.md)",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    repo_root = Path(args.repo_root).resolve()
+    source_docx = Path(args.source_docx).resolve()
+    raw_markdown = Path(args.raw_markdown).resolve()
+
+    docs_dir = repo_root / "docs"
+    docs_assets = docs_dir / "assets"
+    chapters_dir = docs_dir / "chapitres"
+    mkdocs_path = repo_root / "mkdocs.yml"
+
+    if not source_docx.exists():
+        raise FileNotFoundError(f"DOCX source not found: {source_docx}")
+
+    run_pandoc(source_docx, raw_markdown, docs_assets)
+
+    lines = raw_markdown.read_text(encoding="utf-8").splitlines()
+    boundaries = collect_boundaries(lines)
+    chapter_files, underline_count, apostrophe_count = write_chapters(
+        lines, boundaries, chapters_dir
+    )
+    write_mkdocs_config(mkdocs_path, chapter_files)
+
+    print(f"Generated {len(chapter_files)} chapter files in {chapters_dir}")
+    print(f"Updated {mkdocs_path}")
+    print(f"Underline marker replacements: {underline_count}")
+    print(f"Escaped apostrophes fixed: {apostrophe_count}")
+    print(f"Raw markdown output: {raw_markdown}")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except Exception as exc:  # noqa: BLE001
+        print(f"ERROR: {exc}", file=sys.stderr)
+        raise SystemExit(1)
