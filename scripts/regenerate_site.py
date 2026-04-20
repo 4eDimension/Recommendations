@@ -184,6 +184,20 @@ def write_chapters(lines: list[str], boundaries: list[tuple[int, str]], chapters
     return chapter_files, total_underline, total_apostrophes
 
 
+def write_index_page(docs_dir: Path, chapters_dir: Path, chapter_files: list[tuple[str, str]]) -> None:
+    if not chapter_files:
+        raise RuntimeError("No chapter files generated; cannot build index.md")
+
+    intro_relative = chapter_files[0][1]
+    intro_filename = Path(intro_relative).name
+    intro_path = chapters_dir / intro_filename
+    if not intro_path.exists():
+        raise FileNotFoundError(f"Missing introduction chapter file: {intro_path}")
+
+    index_path = docs_dir / "index.md"
+    index_path.write_text(intro_path.read_text(encoding="utf-8"), encoding="utf-8")
+
+
 def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]]) -> None:
     nav_lines = [
         'site_name: "Préconisations 4D"',
@@ -211,9 +225,10 @@ def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]])
         "extra_javascript:",
         "  - assets/javascripts/translate-switch.js",
         "nav:",
+        "  - \"Introduction\": index.md",
     ]
 
-    for title, relative_path in chapter_files:
+    for title, relative_path in chapter_files[1:]:
         nav_lines.append(f'  - "{title}": {relative_path}')
 
     mkdocs_path.write_text("\n".join(nav_lines) + "\n", encoding="utf-8")
@@ -262,6 +277,7 @@ def main() -> int:
     chapter_files, underline_count, apostrophe_count = write_chapters(
         lines, boundaries, chapters_dir
     )
+    write_index_page(docs_dir, chapters_dir, chapter_files)
     write_mkdocs_config(mkdocs_path, chapter_files)
 
     print(f"Generated {len(chapter_files)} chapter files in {chapters_dir}")

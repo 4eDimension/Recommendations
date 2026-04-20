@@ -23,7 +23,7 @@ extra_css:
 extra_javascript:
   - assets/javascripts/translate-switch.js
 nav:
-  - "Introduction": chapitres/01-introduction.md
+  - "Introduction": index.md
   - "Recommandations générales": chapitres/02-recommandations-generales.md
   - "Numéros de port": chapitres/03-numeros-de-port.md
   - "Processeur": chapitres/04-processeur.md
