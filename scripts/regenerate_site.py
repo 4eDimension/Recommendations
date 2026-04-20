@@ -206,14 +206,31 @@ def write_index_page(docs_dir: Path, chapters_dir: Path, chapter_files: list[tup
     index_path.write_text(intro_text + start_link, encoding="utf-8")
 
 
+def grouped_navigation(chapter_files: list[tuple[str, str]]) -> list[tuple[str, list[tuple[str, str]]]]:
+    sections: list[tuple[str, list[tuple[str, str]]]] = [
+        ("Démarrage", chapter_files[1:3]),
+        ("Infrastructure", chapter_files[3:13]),
+        ("Configuration base", chapter_files[13:18]),
+        ("Exploitation et réseau", chapter_files[18:23]),
+        ("Web et sécurité", chapter_files[23:28]),
+        ("Serveurs", chapter_files[28:]),
+    ]
+    return [(name, entries) for name, entries in sections if entries]
+
+
 def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]]) -> None:
+    grouped_sections = grouped_navigation(chapter_files)
     nav_lines = [
         'site_name: "Préconisations 4D"',
         'site_description: "Guide de préconisations 4D"',
+        'site_url: "https://4edimension.github.io/Recommendations/"',
+        'repo_url: "https://github.com/4eDimension/Recommendations"',
+        'repo_name: "4eDimension/Recommendations"',
         "docs_dir: docs",
         "theme:",
         "  name: material",
         "  language: fr",
+        "  custom_dir: docs/overrides",
         "  palette:",
         "    - media: \"(prefers-color-scheme)\"",
         "      toggle:",
@@ -234,27 +251,69 @@ def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]])
         "        icon: material/weather-sunny",
         "        name: Basculer en mode clair",
         "  features:",
+        "    - navigation.tabs",
+        "    - navigation.tabs.sticky",
         "    - navigation.sections",
+        "    - navigation.expand",
+        "    - navigation.tracking",
         "    - navigation.top",
+        "    - toc.follow",
         "    - content.code.copy",
+        "    - search.suggest",
+        "    - search.highlight",
+        "    - search.share",
+        "plugins:",
+        "  - search:",
+        "      lang: fr",
+        "      separator: '[\\\\s\\\\-]+'",
+        "  - git-revision-date-localized:",
+        "      locale: fr",
+        "      type: date",
+        "      fallback_to_build_date: true",
         "markdown_extensions:",
         "  - toc:",
         "      permalink: true",
+        "      toc_depth: 3",
         "  - attr_list",
         "  - admonition",
         "  - tables",
+        "  - meta",
         "extra_css:",
         "  - assets/stylesheets/translate-switch.css",
         "extra_javascript:",
         "  - assets/javascripts/translate-switch.js",
+        "extra:",
+        "  generator: false",
         "nav:",
         "  - \"Introduction\": index.md",
     ]
 
-    for title, relative_path in chapter_files[1:]:
-        nav_lines.append(f'  - "{title}": {relative_path}')
+    for section_name, entries in grouped_sections:
+        nav_lines.append(f'  - "{section_name}":')
+        for title, relative_path in entries:
+            nav_lines.append(f'    - "{title}": {relative_path}')
 
     mkdocs_path.write_text("\n".join(nav_lines) + "\n", encoding="utf-8")
+
+
+def write_sitemap(docs_dir: Path, chapter_files: list[tuple[str, str]]) -> None:
+    base_url = "https://4edimension.github.io/Recommendations/"
+    urls = [base_url]
+    for _, relative_path in chapter_files[1:]:
+        slug = Path(relative_path).stem + "/"
+        urls.append(base_url + "chapitres/" + slug)
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for url in urls:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{url}</loc>")
+        lines.append("  </url>")
+    lines.append("</urlset>")
+
+    (docs_dir / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def parse_args() -> argparse.Namespace:
@@ -302,6 +361,7 @@ def main() -> int:
     )
     write_index_page(docs_dir, chapters_dir, chapter_files)
     write_mkdocs_config(mkdocs_path, chapter_files)
+    write_sitemap(docs_dir, chapter_files)
 
     print(f"Generated {len(chapter_files)} chapter files in {chapters_dir}")
     print(f"Updated {mkdocs_path}")

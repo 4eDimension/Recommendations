@@ -39,6 +39,17 @@
   color: #ffffff;
 }
 
+.md-banner {
+  background: #0b3a67;
+  color: #ffffff;
+}
+
+.md-banner .md-banner__inner {
+  font-size: 0.78rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
 @media (max-width: 768px) {
   #mkdocs-lang-switch {
     top: 10px;
