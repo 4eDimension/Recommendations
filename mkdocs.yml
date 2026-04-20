@@ -18,6 +18,10 @@ markdown_extensions:
   - attr_list
   - admonition
   - tables
+extra_css:
+  - assets/stylesheets/translate-switch.css
+extra_javascript:
+  - assets/javascripts/translate-switch.js
 nav:
   - "Introduction": chapitres/01-introduction.md
   - "Recommandations générales": chapitres/02-recommandations-generales.md

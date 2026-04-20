@@ -206,6 +206,10 @@ def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]])
         "  - attr_list",
         "  - admonition",
         "  - tables",
+        "extra_css:",
+        "  - assets/stylesheets/translate-switch.css",
+        "extra_javascript:",
+        "  - assets/javascripts/translate-switch.js",
         "nav:",
     ]
 
