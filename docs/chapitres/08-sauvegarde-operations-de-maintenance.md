@@ -1,6 +1,6 @@
 # Sauvegarde / Opérations de maintenance
 
-[Recommandé :]{.underline}
+<u>Recommandé :</u>
 
 - Programmer une sauvegarde journalière de la base de données
   (structure, données et fichier d'index des données)
@@ -11,7 +11,7 @@
 
 - Utiliser un logiciel de snapshot compatible avec Volume Shadow Copy
   Service sous Windows pour sauvegarder les fichiers en cours
-  d\'exécution (notamment pour sauvegarder la base de données 4D « à
+  d'exécution (notamment pour sauvegarder la base de données 4D « à
   chaud »)
 
 - Activer le fichier d'historique 4D (.journal)
@@ -32,32 +32,32 @@
 
 - Programmer de temps en temps une opération de compactage du fichier de
   données avec le CSM (depuis la v13, il est possible de détecter la
-  fragmentation d\'une table 4D et donc d\'agir en conséquence grâce à
+  fragmentation d'une table 4D et donc d'agir en conséquence grâce à
   la commande « Lire fragmentation table »)
 
-- Fermer la fenêtre d\'administration après chaque utilisation
+- Fermer la fenêtre d'administration après chaque utilisation
 
 Depuis la version 4D v15 R4, nous avons optimisé de façon importante
-l\'algorithme de réindexation globale de la base de données. Tout le
-processus a été revu, et l\'opération peut s\'effectuer désormais
-jusqu\'à deux fois plus rapidement.
+l'algorithme de réindexation globale de la base de données. Tout le
+processus a été revu, et l'opération peut s'effectuer désormais
+jusqu'à deux fois plus rapidement.
 
 *Note : Une réindexation globale est nécessaire, par exemple, après une
 réparation de la base de données ou lorsque le fichier .4dindx a été
 supprimé.*
 
 Comme chaque enregistrement de chaque table indexée doit être chargé en
-mémoire durant l\'indexation, l\'optimisation a visé à minimiser les
-échanges entre le cache et le disque (swaps). L\'opération est désormais
+mémoire durant l'indexation, l'optimisation a visé à minimiser les
+échanges entre le cache et le disque (swaps). L'opération est désormais
 effectuée séquentiellement sur chaque table, ce qui réduit les besoins
-en chargement et en déchargement d\'enregistrements.
+en chargement et en déchargement d'enregistrements.
 
 Idéalement, si le cache était assez grand pour contenir la totalité du
 fichier de données et des index, le nouvel algorithme de réindexation
-n\'apporterait aucune amélioration. Cependant, la mémoire disponible sur
-le serveur n\'est généralement pas aussi grande. Si le cache est assez
+n'apporterait aucune amélioration. Cependant, la mémoire disponible sur
+le serveur n'est généralement pas aussi grande. Si le cache est assez
 grand pour contenir au moins les données et les index de la table la
-plus volumineuse, alors le nouvel algorithme sera jusqu\'à deux fois
+plus volumineuse, alors le nouvel algorithme sera jusqu'à deux fois
 plus rapide que le précédent.
 
 Réaliser des sauvegardes régulières des données est important mais ne
@@ -79,25 +79,25 @@ Si vous travaillez en environnement virtuel, utiliser Volume Shadow Copy
 sous Windows Server afin de gérer correctement les requêtes de
 snapshots.
 
-En plus de la sauvegarde et du fichier d\'historique de 4D, nous vous
+En plus de la sauvegarde et du fichier d'historique de 4D, nous vous
 invitons à planifier régulièrement des opérations de maintenance en
-vérifiant et en compactant le fichier de données et d\'index.
+vérifiant et en compactant le fichier de données et d'index.
 
 Une fois votre stratégie de sauvegarde mise en place, nous vous invitons
-à envisager le pire (incendie, vol) et donc d\'effectuer une copie
+à envisager le pire (incendie, vol) et donc d'effectuer une copie
 hebdomadaire de la base sur un support inerte dans un autre endroit
 sécurisé.
 
-Dans le cadre d\'applications critiques, il est également possible de
+Dans le cadre d'applications critiques, il est également possible de
 mettre en place un système de sauvegarde par miroir logique, permettant
-un redémarrage instantané en cas d\'incident sur la base en
+un redémarrage instantané en cas d'incident sur la base en
 exploitation. Les deux machines communiquent par le réseau, la machine
 en exploitation transmettant régulièrement à la machine miroir les
-évolutions de la base par l\'intermédiaire du fichier d\'historique.
+évolutions de la base par l'intermédiaire du fichier d'historique.
 
-De cette façon, en cas d\'incident sur la base en exploitation, vous
+De cette façon, en cas d'incident sur la base en exploitation, vous
 pouvez repartir de la base miroir pour reprendre très rapidement
-l\'exploitation sans aucune perte de données.
+l'exploitation sans aucune perte de données.
 
 Les principes mis en œuvre sont les suivants :
 
@@ -106,7 +106,7 @@ Les principes mis en œuvre sont les suivants :
   installée sur le poste 4D Server miroir.
 
 - Un test au démarrage de l'application (par exemple la présence d'un
-  fichier spécifique dans un sous-dossier de l\'application 4D Server)
+  fichier spécifique dans un sous-dossier de l'application 4D Server)
   permet de distinguer chaque version (en exploitation et en miroir) et
   donc d'exécuter les opérations appropriées.
 
@@ -145,8 +145,8 @@ devez veiller à ce qu'aucune sauvegarde, automatique ou manuelle, ne
 soit effectuée sur la base en exploitation. En revanche, il est possible
 de sauvegarder la base miroir.*
 
-Depuis la version v14, il est possible d\'activer le fichier
-d\'historique courant sur le poste miroir. Vous pouvez ainsi mettre en
+Depuis la version v14, il est possible d'activer le fichier
+d'historique courant sur le poste miroir. Vous pouvez ainsi mettre en
 place un « miroir de miroir », ou des serveurs miroirs en série. Cette
-possibilité s\'appuie sur la commande « INTEGRER FICHIER HISTORIQUE
+possibilité s'appuie sur la commande « INTEGRER FICHIER HISTORIQUE
 MIROIR ».

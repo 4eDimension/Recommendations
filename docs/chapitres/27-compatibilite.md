@@ -1,6 +1,6 @@
 ## Compatibilité
 
-Concerne uniquement les bases de données converties (issues d\'une
+Concerne uniquement les bases de données converties (issues d'une
 version précédente de 4D).
 
 - Cocher « Exécuter CHERCHER PAR FORMULE » sur le serveur
@@ -18,7 +18,7 @@ version précédente de 4D).
 - Cocher « Utiliser le mode Unicode »
 
 - Cocher « Définir le point et la virgule comme caractères
-  d\'emplacement dans les formats numériques »
+  d'emplacement dans les formats numériques »
 
 - Cocher « Utiliser la notation objet pour accéder aux propriétés des
   objets »

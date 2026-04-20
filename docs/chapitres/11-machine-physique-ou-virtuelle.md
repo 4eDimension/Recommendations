@@ -1,12 +1,12 @@
 # Machine physique ou virtuelle
 
-[Recommandé :]{.underline} machine physique dédiée par application 4D
+<u>Recommandé :</u> machine physique dédiée par application 4D
 
 Nous recommandons de déployer une application 4D par machine virtuelle
 ou physique.
 
 Même si 4D fonctionne en environnement virtuel (on-premise ou dans le
-Cloud) et est donc éligible en terme d\'exploitabilité, côté
+Cloud) et est donc éligible en terme d'exploitabilité, côté
 performances notre expérience nous montre qu'une machine physique offre
 de meilleures performances dans le temps à ressources équivalentes.
 
@@ -20,14 +20,14 @@ Toutefois, si l'on peut trouver un avantage à la virtualisation c'est la
 souplesse d'allocation des ressources (CPU, mémoire notamment). Il est
 possible d'allouer des ressources supplémentaires par la suite, voir
 même d'allouer des ressources en temps réel, en fonction de l'activité
-de la machine. Nous avons d\'ailleurs un certain nombre de clients qui
+de la machine. Nous avons d'ailleurs un certain nombre de clients qui
 travaillent avec des environnements virtualisés, de plus en plus
 d'ailleurs. Nous avons même des clients qui déploient des serveurs RDS
 virtualisés sur des serveurs lames.
 
 Nous n'avons cependant pas de documents officiels certifiant le
 fonctionnement de 4D en environnement virtuel ou privilégiant une
-solution plutôt qu\'une autre.
+solution plutôt qu'une autre.
 
 Nous préconisons uniquement de s'assurer que les performances de la
 machine soient suffisantes en termes de ressources (mémoire, processeur,

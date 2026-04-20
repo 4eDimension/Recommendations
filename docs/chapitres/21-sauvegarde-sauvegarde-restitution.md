@@ -9,7 +9,7 @@
 
 - Cocher « Réessayer dans 561 secondes » si la sauvegarde échoue
 
-- Décocher l\'option « Annuler l\'opération au bout de X tentatives »
+- Décocher l'option « Annuler l'opération au bout de X tentatives »
 
 - Cocher l'option « Restituer la dernière sauvegarde si la base est
   endommagée »

@@ -1,11 +1,11 @@
 ## 4D Server
 
 4D Server est un système intégré de développement client / serveur,
-optimisé pour créer des applications d\'entreprise robustes avec un
+optimisé pour créer des applications d'entreprise robustes avec un
 système de base de données intégrée. Bien que 4D peut envoyer des
 données (avec des normes telles que HTTP, SOAP, ODBC ou OCI) ou peut
-être accessible à partir de l\'extérieur (avec HTTP, SOAP, ODBC / SQL),
-l\'utilisation principale est basée sur le langage de développement
+être accessible à partir de l'extérieur (avec HTTP, SOAP, ODBC / SQL),
+l'utilisation principale est basée sur le langage de développement
 interne « 4D », en utilisant un protocole réseau interne et propriétaire
 pour communiquer entre le client et le serveur.
 
@@ -15,11 +15,11 @@ fichier contenant une clé.
 
 La liaison étroite entre le langage de développement et la communication
 réseau permet une construction de haut niveau dans le concept de
-protection, en évitant les scénarios d\'attaque typiques tels que
-l\'injection SQL ou des attaques « buffer overflow ».
+protection, en évitant les scénarios d'attaque typiques tels que
+l'injection SQL ou des attaques « buffer overflow ».
 
 Le langage 4D est un langage puissant et mature, parfaitement conçu pour
-construire des systèmes d\'applications d\'entreprise. Il propose plus
+construire des systèmes d'applications d'entreprise. Il propose plus
 de 1 500 commandes, couvrant les opérations de base de données (tris,
 requêtes, créations, transactions et ainsi de suite), l'impression, la
 communication avec d'autres appareils ou ordinateurs, la gestion des

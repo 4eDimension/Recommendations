@@ -1,6 +1,6 @@
 # Recommandations générales
 
-[Recommandé :]{.underline}
+<u>Recommandé :</u>
 
 - Utiliser une gamme supportée
   (<https://fr.4d.com/cycle-de-vie-produits>), au choix :

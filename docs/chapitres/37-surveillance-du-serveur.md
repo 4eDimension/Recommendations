@@ -1,9 +1,9 @@
 # Surveillance du serveur
 
 Vous pouvez utiliser le composant « 4D_Info_Report » pour collecter un
-maximum d\'informations :
+maximum d'informations :
 
-- sur l\'environnement système, matériel, 4D
+- sur l'environnement système, matériel, 4D
 
 - sur la base : structure, données, triggers, index, réglages
   personnalisés utilisés, etc.
@@ -25,7 +25,7 @@ plusieurs paramètres :
 
 - le trafic réseau,
 
-- l\'état de la mémoire.
+- l'état de la mémoire.
 
 Ces informations peuvent être obtenues par programmation grâce à la
 commande « LIRE APERCU ACTIVITE ». Cette commande permet d'obtenir un

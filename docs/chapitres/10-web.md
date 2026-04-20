@@ -1,10 +1,10 @@
 # Web
 
-[Recommandé :]{.underline}
+<u>Recommandé :</u>
 
 - utiliser une version 64 bits de 4D
 
-- utiliser le serveur web de 4D Server (le mode préemptif n\'est pas
+- utiliser le serveur web de 4D Server (le mode préemptif n'est pas
   pris en charge par 4D en mode distant)
 
 - déployer une application 4D compilée
@@ -22,7 +22,7 @@ applications compilées. La plupart des commandes de 4D liées au Web, les
 méthodes et les URL de la base de données sont thread-safe et peuvent
 être utilisées en mode préemptif. Vous pouvez configurer votre code lié
 au Web, y compris les balises HTML 4D et les méthodes base Web, afin
-qu\'il s\'exécute simultanément sur le plus grand nombre de cœurs
+qu'il s'exécute simultanément sur le plus grand nombre de cœurs
 possibles.
 
 Si vous souhaitez rendre une application 4D full web hautement
@@ -44,7 +44,7 @@ disponible, voici l'architecture que nous vous conseillons :
 
     - disque 1 : contient le système et les applications
 
-    - disque 2 : contient les sources de l\'application 4D connectées à
+    - disque 2 : contient les sources de l'application 4D connectées à
       un serveur de sources (exemple : Gitlab) -- permet de faciliter
       l'intégration, le déploiement et le suivi des mises à jour du code
       sur les différentes serveurs (test, recette et production)
@@ -52,7 +52,7 @@ disponible, voici l'architecture que nous vous conseillons :
     - disque 3 : contient la base de données (disque SSD)
 
     - disque 4 : contient les sauvegardes 4D et son fichier
-      d\'historique courant (disque SSD) -- permet d'automatiser la
+      d'historique courant (disque SSD) -- permet d'automatiser la
       restitution automatique des sauvegardes sur une autre VM pour
       vérifier les données régulièrement et s'assurer qu'elles sont
       saines
