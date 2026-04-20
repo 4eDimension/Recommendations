@@ -8,6 +8,5 @@ Attention : certaines préconisations doivent se faire dans des contextes
 précis car une mauvaise compréhension pourrait générer des problèmes.
 Merci de vous rapprocher de votre interlocuteur technique 4D pour plus
 d'informations.
-# Préconisations 4D
 
-Commencer la lecture: [Introduction](chapitres/01-introduction.md)
+Commencer la lecture: [Recommandations générales](chapitres/02-recommandations-generales.md)

@@ -201,7 +201,9 @@ def write_index_page(docs_dir: Path, chapters_dir: Path, chapter_files: list[tup
         raise FileNotFoundError(f"Missing introduction chapter file: {intro_path}")
 
     index_path = docs_dir / "index.md"
-    index_path.write_text(intro_path.read_text(encoding="utf-8"), encoding="utf-8")
+    intro_text = intro_path.read_text(encoding="utf-8").rstrip()
+    start_link = "\n\nCommencer la lecture: [Recommandations générales](chapitres/02-recommandations-generales.md)\n"
+    index_path.write_text(intro_text + start_link, encoding="utf-8")
 
 
 def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]]) -> None:
