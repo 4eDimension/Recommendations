@@ -1,0 +1,28 @@
+# misc
+.DS_Store
+._*
+ehthumbs.db
+Thumbs.db
+
+# 4D
+**/[dD][aA][tT][aA]/
+*.4DD
+*.Match
+**/DerivedData/
+**/Libraries/
+**/userPreferences.*/
+**/Logs/
+**/Build
+**/Settings
+#**/Project/Trash #Decommenter pour ne pas inclure la poubelle
+Resources/manifest.json
+Resources/InfoPlist.strings
+
+# Github Pages (private repo)
+_config.yml
+_includes/
+site/
+
+# IA
+.github/skills
+.github/instructions
