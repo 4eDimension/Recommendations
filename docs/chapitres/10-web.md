@@ -30,41 +30,41 @@ disponible, voici l'architecture que nous vous conseillons :
 
 - Front-End :
 
-  - Mettre en place un load balancer (exemple : Nginx) et utiliser une
+    - Mettre en place un load balancer (exemple : Nginx) et utiliser une
     IP élastique pour rediriger les requêtes web vers la VM de son choix
 
-  - Disposer d'une page de maintenance à afficher lorsque la production
+    - Disposer d'une page de maintenance à afficher lorsque la production
     est interrompue
 
 - Back-End :
 
-  - Mettre en place une VM avec son disque système et 3 disques attachés
+    - Mettre en place une VM avec son disque système et 3 disques attachés
     supplémentaires, dont 2 SSD (qui peuvent ainsi être détachés et
     rattachés à une autre VM, à la demande)
 
-    - disque 1 : contient le système et les applications
+        - disque 1 : contient le système et les applications
 
-    - disque 2 : contient les sources de l'application 4D connectées à
+        - disque 2 : contient les sources de l'application 4D connectées à
       un serveur de sources (exemple : Gitlab) -- permet de faciliter
       l'intégration, le déploiement et le suivi des mises à jour du code
       sur les différentes serveurs (test, recette et production)
 
-    - disque 3 : contient la base de données (disque SSD)
+        - disque 3 : contient la base de données (disque SSD)
 
-    - disque 4 : contient les sauvegardes 4D et son fichier
+        - disque 4 : contient les sauvegardes 4D et son fichier
       d'historique courant (disque SSD) -- permet d'automatiser la
       restitution automatique des sauvegardes sur une autre VM pour
       vérifier les données régulièrement et s'assurer qu'elles sont
       saines
 
-  - Sauvegarder les sessions pour ne pas perdre les contextes web
+    - Sauvegarder les sessions pour ne pas perdre les contextes web
     (stockés en mémoire) des utilisateurs connectés, 2 solutions (au
     choix) sont envisageables pour cela :
 
-    - Côté client : Utiliser JSON Web Token (JWT) pour sauvegarder les
+        - Côté client : Utiliser JSON Web Token (JWT) pour sauvegarder les
       sessions dans le navigateur
 
-    - Côté serveur : Sauvegarder les sessions dans la base de données 4D
+        - Côté serveur : Sauvegarder les sessions dans la base de données 4D
 
 Lorsque vous prévoyez de faire une mise à jour système ou applicative,
 voici la procédure à suivre :

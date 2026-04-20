@@ -149,6 +149,12 @@ def clean_chapter_content(text: str) -> tuple[str, int, int]:
     # Example: ![](../assets/media/image.png){width="7.8in"\nheight="4.0in"}
     text = re.sub(r"(!\[[^\]]*\]\([^\)]+\))\{[^}]*\}", r"\1", text, flags=re.DOTALL)
 
+    # Python-Markdown is stricter than some renderers.
+    # Normalize bullet indentation so nested levels stay nested in HTML:
+    # level-2 bullets: 2 -> 4 spaces, level-3 bullets: 4 -> 8 spaces.
+    text = re.sub(r"(?m)^    (?=[-*]\s)", "        ", text)
+    text = re.sub(r"(?m)^  (?=[-*]\s)", "    ", text)
+
     # Fix image paths from docs/chapitres/*.md
     text = text.replace("(docs/assets/", "(../assets/")
     text = text.replace("](docs/assets/", "](../assets/")

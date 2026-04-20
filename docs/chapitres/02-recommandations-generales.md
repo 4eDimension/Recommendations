@@ -5,30 +5,30 @@
 - Utiliser une gamme supportée
   (<https://fr.4d.com/cycle-de-vie-produits>), au choix :
 
-  - La gamme Feature Release : 20 Rx
+    - La gamme Feature Release : 20 Rx
 
-  - La gamme Long Term Support Release : 20.x
+    - La gamme Long Term Support Release : 20.x
 
 - Déployer la version la plus récente de la gamme que vous aurez choisie
   (<https://fr.4d.com/product-download/>) :
 
-  - Gamme Feature Release :
+    - Gamme Feature Release :
 
-    - Une nouvelle version R est disponible tous les 3 mois contenant de
+        - Une nouvelle version R est disponible tous les 3 mois contenant de
       nouvelles fonctionnalités
 
-    - 2 HotFix sont disponibles mensuellement pour la version R courante
+        - 2 HotFix sont disponibles mensuellement pour la version R courante
       contenant des corrections de bugs empêchant son utilisation en
       déploiement (il faudra attendre la version R suivante pour les
       autres bugs)
 
-  - Gamme LTS Release :
+    - Gamme LTS Release :
 
-    - Une nouvelle version majeure est disponible tous les 18 mois
+        - Une nouvelle version majeure est disponible tous les 18 mois
       contenant les fonctionnalités des 6 versions R antérieures à sa
       sortie
 
-    - Des versions mineures et des HotFix sont disponibles régulièrement
+        - Des versions mineures et des HotFix sont disponibles régulièrement
       pour la version LTS majeure courante contenant des corrections de
       bugs
 

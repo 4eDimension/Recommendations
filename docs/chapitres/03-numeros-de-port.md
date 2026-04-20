@@ -5,32 +5,32 @@ disponibles et dédiés à l'application 4D Server
 
 - ports obligatoires :
 
-  - TCP 19813 : port de publication client/serveur & serveur
+    - TCP 19813 : port de publication client/serveur & serveur
     d'application (modifiable dans les propriétés de la base)
 
-  - TCP 19814 : port applicatif & serveur de base de données (non
+    - TCP 19814 : port applicatif & serveur de base de données (non
     modifiable : port de publication +1)
 
 - ports facultatifs :
 
-  - TCP 19812 : port pour le serveur SQL (modifiable dans les propriétés
+    - TCP 19812 : port pour le serveur SQL (modifiable dans les propriétés
     de la base)
 
-  - UDP 19813 : port pour le broadcast (non modifiable, n'est utilisé
+    - UDP 19813 : port pour le broadcast (non modifiable, n'est utilisé
     que si le port de publication est égal à sa valeur par défaut :
     19813)
 
-  - TCP 19815 : port du débogage distant du serveur (non modifiable :
+    - TCP 19815 : port du débogage distant du serveur (non modifiable :
     port de publication +2)
 
-  - TCP 80 et TCP 443 : ports pour le serveur Web, utilisés pour les
+    - TCP 80 et TCP 443 : ports pour le serveur Web, utilisés pour les
     requêtes HTTP, HTTPS, SOAP ou REST (modifiables dans les propriétés
     de la base)
 
-  - TCP 8002 : port pour l'interpréteur PHP (modifiable dans les
+    - TCP 8002 : port pour l'interpréteur PHP (modifiable dans les
     propriétés de la base)
 
-  - d'autres ports peuvent également être utilisés par 4D, notamment
+    - d'autres ports peuvent également être utilisés par 4D, notamment
     par le plugin 4D Internet Commands
 
 Vous pouvez modifier les ports utilisés par 4D, par défaut. Cependant
@@ -43,17 +43,17 @@ applications :
   par des programmes exécutés par des utilisateurs disposant de
   privilèges d'accès avancés.
 
-  - 20 et 21 FTP;
+    - 20 et 21 FTP;
 
-  - 23 TELNET;
+    - 23 TELNET;
 
-  - 25 SMTP;
+    - 25 SMTP;
 
-  - 37 NTP;
+    - 37 NTP;
 
-  - 80 et 8080 HTTP;
+    - 80 et 8080 HTTP;
 
-  - 443 HTTPS.
+    - 443 HTTPS.
 
 - 1024 à 49151 (Ports enregistrés) : Ces ports sont enregistrés par
   l'I.A.N.A. et peuvent être utilisés sur la plupart des systèmes par
