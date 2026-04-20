@@ -38,11 +38,9 @@ Vous trouverez ci-dessous un comparatif des différents niveaux de RAID
 suivi des types de système RAID. Ce tableau n'a pas été réalisé par 4D
 mais je trouve qu'il résume bien ce qu'il faut savoir sur le RAID.
 
-![](../assets/media/image3.png){width="7.8782458442694665in"
-height="4.0in"}
+![](../assets/media/image3.png)
 
-![](../assets/media/image4.png){width="7.875in"
-height="2.2868055555555555in"}
+![](../assets/media/image4.png)
 
 # 
 
