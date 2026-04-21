@@ -1,4 +1,4 @@
-## Sauvegarde / Sauvegarde & restitution
+# Sauvegarde / Sauvegarde & restitution
 
 - Cocher l'option « Conserver les X derniers fichiers de sauvegarde »
 

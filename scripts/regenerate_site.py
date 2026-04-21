@@ -160,7 +160,88 @@ def clean_chapter_content(text: str) -> tuple[str, int, int]:
     text = text.replace("](docs/assets/", "](../assets/")
     text = text.replace('"docs/assets/', '"../assets/')
 
+    # Normalize heading levels and remove duplicates
+    text = normalize_heading_levels(text)
+    text = remove_duplicate_headings(text)
+
     return text, underline_count, apostrophe_count
+
+
+def normalize_heading_levels(text: str) -> str:
+    """Ensure the first heading is H1, then maintain hierarchy H1→H2→H3+ for remaining headings."""
+    lines = text.split('\n')
+    if not lines:
+        return text
+    
+    first_heading_idx = None
+    first_level = None
+    
+    # Find the first heading
+    heading_re = re.compile(r'^(#{1,6})\s')
+    for idx, line in enumerate(lines):
+        match = heading_re.match(line)
+        if match:
+            first_heading_idx = idx
+            first_level = len(match.group(1))
+            break
+    
+    if first_heading_idx is None:
+        return text  # No headings found
+    
+    # Calculate shift needed to make first heading H1
+    shift = 1 - first_level
+    
+    if shift == 0:
+        return text  # Already starts at H1
+    
+    # Apply shift to all headings
+    result = []
+    for idx, line in enumerate(lines):
+        match = heading_re.match(line)
+        if match:
+            current_level = len(match.group(1))
+            new_level = max(1, min(6, current_level + shift))
+            new_hashes = '#' * new_level
+            rest = line[len(match.group(1)):]
+            result.append(new_hashes + rest)
+        else:
+            result.append(line)
+    
+    return '\n'.join(result)
+
+
+def remove_duplicate_headings(text: str) -> str:
+    """Remove consecutive duplicate headings and filter empty headings."""
+    lines = text.split('\n')
+    if not lines:
+        return text
+    
+    heading_re = re.compile(r'^(#{1,6})\s+(.*)$')
+    result = []
+    last_heading = None
+    
+    for line in lines:
+        match = heading_re.match(line)
+        if match:
+            level = len(match.group(1))
+            title = match.group(2).strip()
+            
+            # Skip empty headings
+            if not title:
+                continue
+            
+            # Skip if it's the same heading (level + title) as the last one
+            current = (level, title)
+            if current == last_heading:
+                continue
+            
+            last_heading = current
+        else:
+            last_heading = None  # Reset on non-heading lines
+        
+        result.append(line)
+    
+    return '\n'.join(result)
 
 
 def write_chapters(lines: list[str], boundaries: list[tuple[int, str]], chapters_dir: Path) -> tuple[list[tuple[str, str]], int, int]:

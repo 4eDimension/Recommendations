@@ -1,4 +1,4 @@
-## Base de données / Mémoire
+# Base de données / Mémoire
 
 - Décocher l'option « Calcul du cache adaptatif »
 

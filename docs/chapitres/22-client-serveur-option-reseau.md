@@ -1,4 +1,4 @@
-## Client-Serveur / Option réseau
+# Client-Serveur / Option réseau
 
 - Cocher « Publier la base au démarrage »
 

@@ -1,4 +1,4 @@
-## Base de données / Stockage des données
+# Base de données / Stockage des données
 
 - Décocher l'option « Ne pas alerter si la structure est en lecture
   seule »

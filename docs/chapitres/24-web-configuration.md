@@ -1,4 +1,4 @@
-## Web / Configuration
+# Web / Configuration
 
 Si vous utilisez le serveur Web de 4D.
 

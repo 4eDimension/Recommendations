@@ -1,4 +1,4 @@
-## Système de sauvegarde et de journalisation
+# Système de sauvegarde et de journalisation
 
 4D fournit par défaut un système de journalisation transactionnelle.
 Chaque opération de modification de données est enregistrée et peut être

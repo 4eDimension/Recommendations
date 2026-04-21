@@ -1,4 +1,4 @@
-## Serveur SQL
+# Serveur SQL
 
 Alors que l'accès aux données pour un client 4D utilise par défaut un
 protocole propriétaire, l'accès SQL (natif ou via ODBC) est aussi bien

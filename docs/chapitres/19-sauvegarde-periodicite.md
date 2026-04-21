@@ -1,4 +1,4 @@
-## Sauvegarde / Périodicité
+# Sauvegarde / Périodicité
 
 - Sélectionner « Tous les jours » pour la sauvegarde automatique
 

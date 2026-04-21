@@ -1,4 +1,4 @@
-## Web / Options (II)
+# Web / Options (II)
 
 - Sélectionner le jeu standard (par défaut UTF-8)
 

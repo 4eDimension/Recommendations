@@ -1,4 +1,4 @@
-## Web / Options (I)
+# Web / Options (I)
 
 - Cocher « Utiliser le cache Web de 4D »
 

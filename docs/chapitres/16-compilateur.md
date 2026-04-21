@@ -1,4 +1,4 @@
-## Compilateur
+# Compilateur
 
 Vous devez toujours déployer une application 4D compilée en Production.
 

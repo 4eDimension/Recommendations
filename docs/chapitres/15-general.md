@@ -1,4 +1,4 @@
-## Général
+# Général
 
 Si votre application 4D a été créée avec une très ancienne version de
 4D, il est possible qu'une zone « Priorités CPU » soit visible dans

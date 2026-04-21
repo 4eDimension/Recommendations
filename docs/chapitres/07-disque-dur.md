@@ -42,8 +42,6 @@ mais je trouve qu'il résume bien ce qu'il faut savoir sur le RAID.
 
 ![](../assets/media/image4.png)
 
-# 
 
-# 
 
 #

@@ -1,4 +1,4 @@
-## Mécanisme de mise à jour logicielle
+# Mécanisme de mise à jour logicielle
 
 Les logiciels modernes sont une combinaison complexe de logiciels,
 serveur de base de données, middleware, serveur d'applications, serveur

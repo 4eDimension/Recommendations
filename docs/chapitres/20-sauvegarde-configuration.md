@@ -1,4 +1,4 @@
-## Sauvegarde / Configuration
+# Sauvegarde / Configuration
 
 - Cocher « Données »
 

@@ -1,4 +1,4 @@
-## Compatibilité
+# Compatibilité
 
 Concerne uniquement les bases de données converties (issues d'une
 version précédente de 4D).
