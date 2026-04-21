@@ -1,4 +1,4 @@
-# Protection additionnelle
+## Concepts standards
 
 Tous les concepts de protection standard, tels que la protection de la
 salle Serveur ou l'utilisation de disques durs cryptés (solutions

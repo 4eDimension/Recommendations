@@ -1,4 +1,4 @@
-# Serveur Web
+## Vue d'ensemble
 
 4D dispose de son propre serveur HTTP, un puissant serveur multithread
 pour les contenus statiques et dynamiques. L'intégration étroite a un
