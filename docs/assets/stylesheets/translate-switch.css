@@ -62,3 +62,8 @@
   list-style-type: circle !important;
   padding-inline-start: 1.4rem !important;
 }
+
+/* Hide revision date footer (keep only banner date) */
+.md-source-file {
+  display: none !important;
+}
