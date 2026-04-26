@@ -1,5 +1,5 @@
 site_name: "4D Recommendations"
-site_description: "4D Recommendations Guide"
+site_description: "Technical recommendations for deploying 4D applications: processor, memory, network, backup, security, and 4D Server configuration best practices."
 site_url: "https://4edimension.github.io/Recommendations/en/"
 repo_url: "https://github.com/4eDimension/Recommendations"
 repo_name: "4eDimension/Recommendations"
