@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://4edimension.github.io/Recommendations/sitemap.xml
+Sitemap: https://4edimension.github.io/Recommendations/en/sitemap.xml

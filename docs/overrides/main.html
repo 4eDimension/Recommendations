@@ -3,6 +3,9 @@
 {% block extrahead %}
   {{ super() }}
   <link rel="canonical" href="{{ page.canonical_url }}">
+  <link rel="alternate" hreflang="fr" href="https://4edimension.github.io/Recommendations/">
+  <link rel="alternate" hreflang="en" href="https://4edimension.github.io/Recommendations/en/">
+  <link rel="alternate" hreflang="x-default" href="https://4edimension.github.io/Recommendations/">
   <meta name="description" content="{{ config.site_description }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ config.site_name }}">
@@ -22,11 +25,20 @@
 {% endblock %}
 
 {% block announce %}
-  {% if page and page.meta and page.meta.git_revision_date_localized %}
-    <div class="md-banner">
-      <div class="md-banner__inner md-grid">
-        Dernière mise à jour: {{ page.meta.git_revision_date_localized }}
+  <div class="md-banner">
+    <div class="md-banner__inner md-grid md-banner__flex">
+      <span class="md-banner__date">
+        {% if page and page.meta and page.meta.git_revision_date_localized %}
+          {% if config.theme.language == 'en' %}Last updated:{% else %}Dernière mise à jour :{% endif %}
+          {{ page.meta.git_revision_date_localized }}
+        {% endif %}
+      </span>
+      <div class="lang-switcher">
+        <a class="lang-btn{% if config.theme.language == 'fr' %} is-active{% endif %}"
+           href="https://4edimension.github.io/Recommendations/">FR</a>
+        <a class="lang-btn{% if config.theme.language == 'en' %} is-active{% endif %}"
+           href="https://4edimension.github.io/Recommendations/en/">EN</a>
       </div>
     </div>
-  {% endif %}
+  </div>
 {% endblock %}

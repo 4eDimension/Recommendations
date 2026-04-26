@@ -59,6 +59,99 @@ CHAPTER_TITLES = [
     "Surveillance du serveur",
 ]
 
+CHAPTER_TITLES_EN = [
+    "Introduction",
+    "General recommendations",
+    "Port numbers",
+    "Processor",
+    "Operating system",
+    "Memory",
+    "Hard disk",
+    "Backup / Maintenance operations",
+    "Network",
+    "Web",
+    "Physical or virtual machine",
+    "Manufacturer / Model of machine",
+    "Tests / Acceptance / Deployment",
+    "Properties of the database",
+    "General",
+    "Compiler",
+    "Database / Data storage",
+    "Database / Memory",
+    "Backup / Frequency",
+    "Backup / Configuration",
+    "Backup / Backup & restore",
+    "Client-Server / Network option",
+    "Client-Server / IP Configuration",
+    "Web / Configuration",
+    "Web / Options (I)",
+    "Web / Options (II)",
+    "Compatibility",
+    "Security",
+    "4D Server",
+    "Web server",
+    "SOAP server",
+    "SQL server",
+    "4D password system",
+    "Software update mechanism",
+    "Backup and logging system",
+    "Additional Protection",
+    "Server monitoring",
+]
+
+LANG_CONFIG: dict = {
+    "fr": {
+        "chapter_titles": CHAPTER_TITLES,
+        "site_name": "Préconisations 4D",
+        "site_description": "Guide de préconisations 4D",
+        "site_url": "https://4edimension.github.io/Recommendations/",
+        "docs_dir": "docs",
+        "mkdocs_file": "mkdocs.yml",
+        "language": "fr",
+        "search_lang": "fr",
+        "git_locale": "fr",
+        "index_link_text": "Commencer la lecture",
+        "index_chapter2_slug": "02-recommandations-generales",
+        "index_chapter2_title": "Recommandations générales",
+        "nav_sections": [
+            ("Démarrage", 1, 3),
+            ("Infrastructure", 3, 13),
+            ("Configuration base", 13, 18),
+            ("Exploitation et réseau", 18, 23),
+            ("Web et sécurité", 23, 28),
+            ("Serveurs", 28, None),
+        ],
+        "toggle_auto": "Basculer en mode clair",
+        "toggle_light": "Basculer en mode sombre",
+        "toggle_dark": "Basculer en mode clair",
+    },
+    "en": {
+        "chapter_titles": CHAPTER_TITLES_EN,
+        "site_name": "4D Recommendations",
+        "site_description": "4D Recommendations Guide",
+        "site_url": "https://4edimension.github.io/Recommendations/en/",
+        "docs_dir": "docs_en",
+        "mkdocs_file": "mkdocs_en.yml",
+        "language": "en",
+        "search_lang": "en",
+        "git_locale": "en",
+        "index_link_text": "Start reading",
+        "index_chapter2_slug": "02-general-recommendations",
+        "index_chapter2_title": "General recommendations",
+        "nav_sections": [
+            ("Getting Started", 1, 3),
+            ("Infrastructure", 3, 13),
+            ("Base Configuration", 13, 18),
+            ("Operations and Network", 18, 23),
+            ("Web and Security", 23, 28),
+            ("Servers", 28, None),
+        ],
+        "toggle_auto": "Switch to light mode",
+        "toggle_light": "Switch to dark mode",
+        "toggle_dark": "Switch to light mode",
+    },
+}
+
 
 def normalize_text(value: str) -> str:
     value = value.replace("’", "'").replace("`", "'")
@@ -93,9 +186,9 @@ def run_pandoc(source_docx: Path, raw_markdown: Path, docs_assets: Path) -> None
     subprocess.run(command, check=True)
 
 
-def collect_boundaries(lines: list[str]) -> list[tuple[int, str]]:
+def collect_boundaries(lines: list[str], chapter_titles: list[str]) -> list[tuple[int, str]]:
     heading_re = re.compile(r"^(#{1,6})\s*(.*)$")
-    title_lookup = {normalize_text(title): title for title in CHAPTER_TITLES}
+    title_lookup = {normalize_text(title): title for title in chapter_titles}
 
     boundaries: list[tuple[int, str]] = []
     for idx, line in enumerate(lines):
@@ -120,7 +213,7 @@ def collect_boundaries(lines: list[str]) -> list[tuple[int, str]]:
 
     ordered: list[tuple[int, str]] = []
     missing: list[str] = []
-    for title in CHAPTER_TITLES:
+    for title in chapter_titles:
         normalized = normalize_text(title)
         entry = dedup.get(normalized)
         if entry is None:
@@ -136,7 +229,7 @@ def collect_boundaries(lines: list[str]) -> list[tuple[int, str]]:
     return ordered
 
 
-def clean_chapter_content(text: str) -> tuple[str, int, int]:
+def clean_chapter_content(text: str, docs_dir_name: str = "docs") -> tuple[str, int, int]:
     # Convert [text]{.underline} into HTML underline for MkDocs rendering.
     underline_pat = re.compile(r"\[(.*?)\]\{\.underline\}")
     text, underline_count = underline_pat.subn(r"<u>\1</u>", text)
@@ -155,10 +248,10 @@ def clean_chapter_content(text: str) -> tuple[str, int, int]:
     text = re.sub(r"(?m)^    (?=[-*]\s)", "        ", text)
     text = re.sub(r"(?m)^  (?=[-*]\s)", "    ", text)
 
-    # Fix image paths from docs/chapitres/*.md
-    text = text.replace("(docs/assets/", "(../assets/")
-    text = text.replace("](docs/assets/", "](../assets/")
-    text = text.replace('"docs/assets/', '"../assets/')
+    # Fix image paths (docs_dir_name/assets/ → ../assets/ relative to chapitres/)
+    text = text.replace(f"({docs_dir_name}/assets/", "(../assets/")
+    text = text.replace(f"]({docs_dir_name}/assets/", "](../assets/")
+    text = text.replace(f'"{docs_dir_name}/assets/', '"../assets/')
 
     # Normalize heading levels and remove duplicates
     text = normalize_heading_levels(text)
@@ -244,7 +337,7 @@ def remove_duplicate_headings(text: str) -> str:
     return '\n'.join(result)
 
 
-def write_chapters(lines: list[str], boundaries: list[tuple[int, str]], chapters_dir: Path) -> tuple[list[tuple[str, str]], int, int]:
+def write_chapters(lines: list[str], boundaries: list[tuple[int, str]], chapters_dir: Path, docs_dir_name: str = "docs") -> tuple[list[tuple[str, str]], int, int]:
     if chapters_dir.exists():
         for file in chapters_dir.glob("*.md"):
             file.unlink()
@@ -259,7 +352,7 @@ def write_chapters(lines: list[str], boundaries: list[tuple[int, str]], chapters
         end = boundaries[index + 1][0] if index + 1 < len(boundaries) else len(lines)
         chunk = "\n".join(lines[start:end]).rstrip() + "\n"
 
-        chunk, underline_count, apostrophe_count = clean_chapter_content(chunk)
+        chunk, underline_count, apostrophe_count = clean_chapter_content(chunk, docs_dir_name)
         total_underline += underline_count
         total_apostrophes += apostrophe_count
 
@@ -271,7 +364,7 @@ def write_chapters(lines: list[str], boundaries: list[tuple[int, str]], chapters
     return chapter_files, total_underline, total_apostrophes
 
 
-def write_index_page(docs_dir: Path, chapters_dir: Path, chapter_files: list[tuple[str, str]]) -> None:
+def write_index_page(docs_dir: Path, chapters_dir: Path, chapter_files: list[tuple[str, str]], config: dict) -> None:
     if not chapter_files:
         raise RuntimeError("No chapter files generated; cannot build index.md")
 
@@ -283,54 +376,61 @@ def write_index_page(docs_dir: Path, chapters_dir: Path, chapter_files: list[tup
 
     index_path = docs_dir / "index.md"
     intro_text = intro_path.read_text(encoding="utf-8").rstrip()
-    start_link = "\n\nCommencer la lecture: [Recommandations générales](chapitres/02-recommandations-generales.md)\n"
+    link_text = config["index_link_text"]
+    chapter2_slug = config["index_chapter2_slug"]
+    chapter2_title = config["index_chapter2_title"]
+    start_link = f"\n\n{link_text}: [{chapter2_title}](chapitres/{chapter2_slug}.md)\n"
     index_path.write_text(intro_text + start_link, encoding="utf-8")
+    # Remove the standalone intro file – it is embedded in index.md and must not
+    # appear as an unreferenced page (causes strict-mode warnings).
+    intro_path.unlink(missing_ok=True)
 
 
-def grouped_navigation(chapter_files: list[tuple[str, str]]) -> list[tuple[str, list[tuple[str, str]]]]:
-    sections: list[tuple[str, list[tuple[str, str]]]] = [
-        ("Démarrage", chapter_files[1:3]),
-        ("Infrastructure", chapter_files[3:13]),
-        ("Configuration base", chapter_files[13:18]),
-        ("Exploitation et réseau", chapter_files[18:23]),
-        ("Web et sécurité", chapter_files[23:28]),
-        ("Serveurs", chapter_files[28:]),
-    ]
-    return [(name, entries) for name, entries in sections if entries]
+def grouped_navigation(chapter_files: list[tuple[str, str]], config: dict) -> list[tuple[str, list[tuple[str, str]]]]:
+    sections = []
+    for name, start, end in config["nav_sections"]:
+        entries = chapter_files[start:end]
+        if entries:
+            sections.append((name, entries))
+    return sections
 
 
-def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]]) -> None:
-    grouped_sections = grouped_navigation(chapter_files)
+def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]], config: dict) -> None:
+    grouped_sections = grouped_navigation(chapter_files, config)
+    docs_dir_name = config["docs_dir"]
+    lang = config["language"]
+    search_lang = config["search_lang"]
+    git_locale = config["git_locale"]
     nav_lines = [
-        'site_name: "Préconisations 4D"',
-        'site_description: "Guide de préconisations 4D"',
-        'site_url: "https://4edimension.github.io/Recommendations/"',
+        f'site_name: "{config["site_name"]}"',
+        f'site_description: "{config["site_description"]}"',
+        f'site_url: "{config["site_url"]}"',
         'repo_url: "https://github.com/4eDimension/Recommendations"',
         'repo_name: "4eDimension/Recommendations"',
-        "docs_dir: docs",
+        f"docs_dir: {docs_dir_name}",
         "theme:",
         "  name: material",
-        "  language: fr",
+        f"  language: {lang}",
         "  custom_dir: docs/overrides",
         "  palette:",
         "    - media: \"(prefers-color-scheme)\"",
         "      toggle:",
         "        icon: material/brightness-auto",
-        "        name: Basculer en mode clair",
+        f'        name: {config["toggle_auto"]}',
         "    - media: \"(prefers-color-scheme: light)\"",
         "      scheme: default",
         "      primary: blue",
         "      accent: light blue",
         "      toggle:",
         "        icon: material/weather-night",
-        "        name: Basculer en mode sombre",
+        f'        name: {config["toggle_light"]}',
         "    - media: \"(prefers-color-scheme: dark)\"",
         "      scheme: slate",
         "      primary: blue",
         "      accent: light blue",
         "      toggle:",
         "        icon: material/weather-sunny",
-        "        name: Basculer en mode clair",
+        f'        name: {config["toggle_dark"]}',
         "  features:",
         "    - navigation.tabs",
         "    - navigation.tabs.sticky",
@@ -345,10 +445,10 @@ def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]])
         "    - search.share",
         "plugins:",
         "  - search:",
-        "      lang: fr",
+        f"      lang: {search_lang}",
         "      separator: '[\\\\s\\\\-]+'",
         "  - git-revision-date-localized:",
-        "      locale: fr",
+        f"      locale: {git_locale}",
         "      type: date",
         "      fallback_to_build_date: true",
         "markdown_extensions:",
@@ -361,12 +461,10 @@ def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]])
         "  - meta",
         "extra_css:",
         "  - assets/stylesheets/translate-switch.css",
-        "extra_javascript:",
-        "  - assets/javascripts/translate-switch.js",
         "extra:",
         "  generator: false",
         "nav:",
-        "  - \"Introduction\": index.md",
+        '  - "Introduction": index.md',
     ]
 
     for section_name, entries in grouped_sections:
@@ -377,8 +475,8 @@ def write_mkdocs_config(mkdocs_path: Path, chapter_files: list[tuple[str, str]])
     mkdocs_path.write_text("\n".join(nav_lines) + "\n", encoding="utf-8")
 
 
-def write_sitemap(docs_dir: Path, chapter_files: list[tuple[str, str]]) -> None:
-    base_url = "https://4edimension.github.io/Recommendations/"
+def write_sitemap(docs_dir: Path, chapter_files: list[tuple[str, str]], config: dict) -> None:
+    base_url = config["site_url"]
     urls = [base_url]
     for _, relative_path in chapter_files[1:]:
         slug = Path(relative_path).stem + "/"
@@ -416,6 +514,12 @@ def parse_args() -> argparse.Namespace:
         default="/tmp/recommendations_raw.md",
         help="Temporary markdown output path (default: /tmp/recommendations_raw.md)",
     )
+    parser.add_argument(
+        "--lang",
+        choices=["fr", "en"],
+        default="fr",
+        help="Language to generate (fr or en, default: fr)",
+    )
     return parser.parse_args()
 
 
@@ -425,24 +529,36 @@ def main() -> int:
     source_docx = Path(args.source_docx).resolve()
     raw_markdown = Path(args.raw_markdown).resolve()
 
-    docs_dir = repo_root / "docs"
+    lang = args.lang
+    config = LANG_CONFIG[lang]
+    docs_dir_name = config["docs_dir"]
+    docs_dir = repo_root / docs_dir_name
     docs_assets = docs_dir / "assets"
     chapters_dir = docs_dir / "chapitres"
-    mkdocs_path = repo_root / "mkdocs.yml"
+    mkdocs_path = repo_root / config["mkdocs_file"]
 
     if not source_docx.exists():
         raise FileNotFoundError(f"DOCX source not found: {source_docx}")
 
+    # For EN, copy shared CSS/JS assets from docs/assets so MkDocs can serve them
+    if lang == "en":
+        fr_assets = repo_root / "docs" / "assets"
+        for subdir in ("stylesheets", "javascripts"):
+            src = fr_assets / subdir
+            dst = docs_assets / subdir
+            if src.exists():
+                shutil.copytree(src, dst, dirs_exist_ok=True)
+
     run_pandoc(source_docx, raw_markdown, docs_assets)
 
     lines = raw_markdown.read_text(encoding="utf-8").splitlines()
-    boundaries = collect_boundaries(lines)
+    boundaries = collect_boundaries(lines, config["chapter_titles"])
     chapter_files, underline_count, apostrophe_count = write_chapters(
-        lines, boundaries, chapters_dir
+        lines, boundaries, chapters_dir, docs_dir_name
     )
-    write_index_page(docs_dir, chapters_dir, chapter_files)
-    write_mkdocs_config(mkdocs_path, chapter_files)
-    write_sitemap(docs_dir, chapter_files)
+    write_index_page(docs_dir, chapters_dir, chapter_files, config)
+    write_mkdocs_config(mkdocs_path, chapter_files, config)
+    write_sitemap(docs_dir, chapter_files, config)
 
     print(f"Generated {len(chapter_files)} chapter files in {chapters_dir}")
     print(f"Updated {mkdocs_path}")

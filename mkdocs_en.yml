@@ -1,0 +1,105 @@
+site_name: "4D Recommendations"
+site_description: "4D Recommendations Guide"
+site_url: "https://4edimension.github.io/Recommendations/en/"
+repo_url: "https://github.com/4eDimension/Recommendations"
+repo_name: "4eDimension/Recommendations"
+docs_dir: docs_en
+theme:
+  name: material
+  language: en
+  custom_dir: docs/overrides
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.tracking
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+    - search.share
+plugins:
+  - search:
+      lang: en
+      separator: '[\\s\\-]+'
+  - git-revision-date-localized:
+      locale: en
+      type: date
+      fallback_to_build_date: true
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - attr_list
+  - admonition
+  - tables
+  - meta
+extra_css:
+  - assets/stylesheets/translate-switch.css
+extra:
+  generator: false
+nav:
+  - "Introduction": index.md
+  - "Getting Started":
+    - "General recommendations": chapitres/02-general-recommendations.md
+    - "Port numbers": chapitres/03-port-numbers.md
+  - "Infrastructure":
+    - "Processor": chapitres/04-processor.md
+    - "Operating system": chapitres/05-operating-system.md
+    - "Memory": chapitres/06-memory.md
+    - "Hard disk": chapitres/07-hard-disk.md
+    - "Backup / Maintenance operations": chapitres/08-backup-maintenance-operations.md
+    - "Network": chapitres/09-network.md
+    - "Web": chapitres/10-web.md
+    - "Physical or virtual machine": chapitres/11-physical-or-virtual-machine.md
+    - "Manufacturer / Model of machine": chapitres/12-manufacturer-model-of-machine.md
+    - "Tests / Acceptance / Deployment": chapitres/13-tests-acceptance-deployment.md
+  - "Base Configuration":
+    - "Properties of the database": chapitres/14-properties-of-the-database.md
+    - "General": chapitres/15-general.md
+    - "Compiler": chapitres/16-compiler.md
+    - "Database / Data storage": chapitres/17-database-data-storage.md
+    - "Database / Memory": chapitres/18-database-memory.md
+  - "Operations and Network":
+    - "Backup / Frequency": chapitres/19-backup-frequency.md
+    - "Backup / Configuration": chapitres/20-backup-configuration.md
+    - "Backup / Backup & restore": chapitres/21-backup-backup-restore.md
+    - "Client-Server / Network option": chapitres/22-client-server-network-option.md
+    - "Client-Server / IP Configuration": chapitres/23-client-server-ip-configuration.md
+  - "Web and Security":
+    - "Web / Configuration": chapitres/24-web-configuration.md
+    - "Web / Options (I)": chapitres/25-web-options-i.md
+    - "Web / Options (II)": chapitres/26-web-options-ii.md
+    - "Compatibility": chapitres/27-compatibility.md
+    - "Security": chapitres/28-security.md
+  - "Servers":
+    - "4D Server": chapitres/29-4d-server.md
+    - "Web server": chapitres/30-web-server.md
+    - "SOAP server": chapitres/31-soap-server.md
+    - "SQL server": chapitres/32-sql-server.md
+    - "4D password system": chapitres/33-4d-password-system.md
+    - "Software update mechanism": chapitres/34-software-update-mechanism.md
+    - "Backup and logging system": chapitres/35-backup-and-logging-system.md
+    - "Additional Protection": chapitres/36-additional-protection.md
+    - "Server monitoring": chapitres/37-server-monitoring.md
