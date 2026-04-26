@@ -47,11 +47,11 @@ on our website: <https://us.4d.com/resources/>.
 
     - To deploy **4D** or **4D Server** applications:
 
-        - macOS **Ventura** (**13**);
-
         - macOS **Sonoma** (**14**);
 
         - macOS **Sequoia** (**15**) ;
+
+        - macOS **Tahoe** (**26**) ;
 
     - Deploying 64-bit line:
 
