@@ -33,11 +33,19 @@
           {{ page.meta.git_revision_date_localized }}
         {% endif %}
       </span>
-      <div class="lang-switcher">
-        <a class="lang-btn{% if config.theme.language == 'fr' %} is-active{% endif %}"
-           href="https://4edimension.github.io/Recommendations/">FR</a>
-        <a class="lang-btn{% if config.theme.language == 'en' %} is-active{% endif %}"
-           href="https://4edimension.github.io/Recommendations/en/">EN</a>
+      <div class="banner-actions">
+        <a class="export-btn"
+           href="{% if config.theme.language == 'en' %}{{ config.site_url }}export/recommendations-en.html{% else %}{{ config.site_url }}export/preconisations-fr.html{% endif %}"
+           target="_blank"
+           title="{% if config.theme.language == 'en' %}Download full document as HTML{% else %}Télécharger le document complet en HTML{% endif %}">
+          &#x2913;&nbsp;{% if config.theme.language == 'en' %}Export HTML{% else %}Exporter HTML{% endif %}
+        </a>
+        <div class="lang-switcher">
+          <a class="lang-btn{% if config.theme.language == 'fr' %} is-active{% endif %}"
+             href="https://4edimension.github.io/Recommendations/">FR</a>
+          <a class="lang-btn{% if config.theme.language == 'en' %} is-active{% endif %}"
+             href="https://4edimension.github.io/Recommendations/en/">EN</a>
+        </div>
       </div>
     </div>
   </div>

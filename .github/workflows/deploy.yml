@@ -30,11 +30,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-mkdocs.txt
 
+      - name: Install pandoc
+        run: sudo apt-get install -y pandoc
+
       - name: Build FR site
         run: python3 -m mkdocs build
 
       - name: Build EN site
         run: python3 -m mkdocs build -f mkdocs_en.yml --site-dir site/en
+
+      - name: Generate DOCX-faithful HTML exports
+        run: python3 scripts/generate_docx_html.py
 
       - name: Deploy to GitHub Pages
         run: |
