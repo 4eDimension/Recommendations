@@ -1,0 +1,45 @@
+# 4D Application Recommendations
+
+Here are some commonsense recommendations and best practices to follow when deploying 4D applications, along with technical information.
+
+Please note: some recommendations must be made in specific contexts, as a misunderstanding could lead to problems. Please contact your 4D technical contact for more information.
+
+## Table of Contents
+
+- [Introduction](https://4edimension.github.io/Recommendations/en/)
+- [General recommendations](https://4edimension.github.io/Recommendations/en/chapitres/02-general-recommendations/)
+- [Port numbers](https://4edimension.github.io/Recommendations/en/chapitres/03-port-numbers/)
+- [Processor](https://4edimension.github.io/Recommendations/en/chapitres/04-processor/)
+- [Operating system](https://4edimension.github.io/Recommendations/en/chapitres/05-operating-system/)
+- [Memory](https://4edimension.github.io/Recommendations/en/chapitres/06-memory/)
+- [Hard disk](https://4edimension.github.io/Recommendations/en/chapitres/07-hard-disk/)
+- [Backup / Maintenance operations](https://4edimension.github.io/Recommendations/en/chapitres/08-backup-maintenance-operations/)
+- [Network](https://4edimension.github.io/Recommendations/en/chapitres/09-network/)
+- [Web](https://4edimension.github.io/Recommendations/en/chapitres/10-web/)
+- [Physical or virtual machine](https://4edimension.github.io/Recommendations/en/chapitres/11-physical-or-virtual-machine/)
+- [Manufacturer / Model of machine](https://4edimension.github.io/Recommendations/en/chapitres/12-manufacturer-model-of-machine/)
+- [Tests / Acceptance / Deployment](https://4edimension.github.io/Recommendations/en/chapitres/13-tests-acceptance-deployment/)
+- [Properties of the database](https://4edimension.github.io/Recommendations/en/chapitres/14-properties-of-the-database/)
+  - [General](https://4edimension.github.io/Recommendations/en/chapitres/15-general/)
+  - [Compiler](https://4edimension.github.io/Recommendations/en/chapitres/16-compiler/)
+  - [Database / Data storage](https://4edimension.github.io/Recommendations/en/chapitres/17-database-data-storage/)
+  - [Database / Memory](https://4edimension.github.io/Recommendations/en/chapitres/18-database-memory/)
+  - [Backup / Frequency](https://4edimension.github.io/Recommendations/en/chapitres/19-backup-frequency/)
+  - [Backup / Configuration](https://4edimension.github.io/Recommendations/en/chapitres/20-backup-configuration/)
+  - [Backup / Backup & restore](https://4edimension.github.io/Recommendations/en/chapitres/21-backup-backup-restore/)
+  - [Client-Server / Network option](https://4edimension.github.io/Recommendations/en/chapitres/22-client-server-network-option/)
+  - [Client-Server / IP Configuration](https://4edimension.github.io/Recommendations/en/chapitres/23-client-server-ip-configuration/)
+  - [Web / Configuration](https://4edimension.github.io/Recommendations/en/chapitres/24-web-configuration/)
+  - [Web / Options (I)](https://4edimension.github.io/Recommendations/en/chapitres/25-web-options-i/)
+  - [Web / Options (II)](https://4edimension.github.io/Recommendations/en/chapitres/26-web-options-ii/)
+  - [Compatibility](https://4edimension.github.io/Recommendations/en/chapitres/27-compatibility/)
+- [Security](https://4edimension.github.io/Recommendations/en/chapitres/28-security/)
+  - [4D Server](https://4edimension.github.io/Recommendations/en/chapitres/29-4d-server/)
+  - [Web server](https://4edimension.github.io/Recommendations/en/chapitres/30-web-server/)
+  - [SOAP server](https://4edimension.github.io/Recommendations/en/chapitres/31-soap-server/)
+  - [SQL server](https://4edimension.github.io/Recommendations/en/chapitres/32-sql-server/)
+  - [4D password system](https://4edimension.github.io/Recommendations/en/chapitres/33-4d-password-system/)
+  - [Software update mechanism](https://4edimension.github.io/Recommendations/en/chapitres/34-software-update-mechanism/)
+  - [Backup and logging system](https://4edimension.github.io/Recommendations/en/chapitres/35-backup-and-logging-system/)
+  - [Additional Protection](https://4edimension.github.io/Recommendations/en/chapitres/36-additional-protection/)
+- [Server monitoring](https://4edimension.github.io/Recommendations/en/chapitres/37-server-monitoring/)
