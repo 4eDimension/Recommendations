@@ -1,23 +1,49 @@
 {% extends "base.html" %}
 
+{% block htmltitle %}
+  {% if not page or page.is_homepage %}
+    <title>{{ config.site_name }}</title>
+  {% else %}
+    <title>{{ page.title }} - {{ config.site_name }}</title>
+  {% endif %}
+{% endblock %}
+
 {% block extrahead %}
   {{ super() }}
   <meta name="google-site-verification" content="CRVzO1JqWR9npJl9xuEZiUXLvTjdvwNEj9pRMn2EJWE" />
-  <link rel="canonical" href="{{ page.canonical_url }}">
+  {% if page %}<link rel="canonical" href="{{ page.canonical_url }}">{% endif %}
   <link rel="alternate" hreflang="fr" href="https://4edimension.github.io/Recommendations/">
   <link rel="alternate" hreflang="en" href="https://4edimension.github.io/Recommendations/en/">
   <link rel="alternate" hreflang="x-default" href="https://4edimension.github.io/Recommendations/">
-  <meta name="description" content="{{ config.site_description }}">
+  {% set page_description = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
+  {% set page_og_title = config.site_name if not page or page.is_homepage else page.title + " - " + config.site_name %}
+  <meta name="description" content="{{ page_description }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ config.site_name }}">
-  <meta property="og:title" content="{{ page.title if page.title else config.site_name }}">
-  <meta property="og:description" content="{{ config.site_description }}">
+  <meta property="og:title" content="{{ page_og_title }}">
+  <meta property="og:description" content="{{ page_description }}">
   <meta property="og:url" content="{{ page.canonical_url }}">
   <meta property="og:image" content="{{ config.site_url }}assets/media/image1.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ page.title if page.title else config.site_name }}">
-  <meta name="twitter:description" content="{{ config.site_description }}">
+  <meta name="twitter:title" content="{{ page_og_title }}">
+  <meta name="twitter:description" content="{{ page_description }}">
   <meta name="twitter:image" content="{{ config.site_url }}assets/media/image1.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "{{ config.site_name }}",
+    "description": "{{ config.site_description }}",
+    "url": "{{ config.site_url }}",
+    "inLanguage": "{% if config.theme.language == 'fr' %}fr-FR{% else %}en{% endif %}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "4D SAS",
+      "url": "https://www.4d.com"
+    },
+    "keywords": {% if config.theme.language == 'fr' %}"4D, préconisations, recommandations, 4D Server, déploiement, configuration, sécurité"{% else %}"4D, recommendations, best practices, 4D Server, deployment, configuration, security"{% endif %}
+  }
+  </script>
   <style>
     .md-source-file {
       display: none !important;
