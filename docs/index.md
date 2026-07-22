@@ -1,4 +1,8 @@
-# Introduction
+---
+description: Préconisations et recommandations techniques pour le déploiement d'applications 4D : processeur, mémoire, réseau, sauvegarde, sécurité et configuration 4D Server.
+---
+
+# Préconisations 4D
 
 Voici quelques préconisations et bonnes pratiques, pleines de bon sens,
 à suivre lorsque vous déployez des applications 4D, agrémentées

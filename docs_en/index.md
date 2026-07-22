@@ -1,4 +1,8 @@
-# Introduction
+---
+description: Technical recommendations and best practices for deploying 4D applications: processor, memory, network, backup, security and 4D Server configuration.
+---
+
+# 4D Recommendations
 
 Here are some commonsense recommendations and best practices to follow
 when deploying 4D applications, along with technical information.

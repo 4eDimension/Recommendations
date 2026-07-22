@@ -2,113 +2,187 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://4edimension.github.io/Recommendations/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/02-recommandations-generales/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/03-numeros-de-port/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/04-processeur/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/05-systeme-dexploitation/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/06-memoire/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/07-disque-dur/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/08-sauvegarde-operations-de-maintenance/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/09-reseau/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/10-web/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/11-machine-physique-ou-virtuelle/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/12-marque-modele-de-machine/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/13-tests-recette-deploiement/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/14-proprietes-de-la-base/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/15-general/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/16-compilateur/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/17-base-de-donnees-stockage-des-donnees/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/18-base-de-donnees-memoire/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/19-sauvegarde-periodicite/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/20-sauvegarde-configuration/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/21-sauvegarde-sauvegarde-restitution/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/22-client-serveur-option-reseau/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/23-client-serveur-configuration-ip/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/24-web-configuration/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/25-web-options-i/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/26-web-options-ii/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/27-compatibilite/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/28-securite/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/29-4d-server/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/30-serveur-web/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/31-serveur-soap/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/32-serveur-sql/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/33-systeme-de-mot-de-passe-4d/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/34-mecanisme-de-mise-a-jour-logicielle/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/35-systeme-de-sauvegarde-et-de-journalisation/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/36-protection-additionnelle/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://4edimension.github.io/Recommendations/chapitres/37-surveillance-du-serveur/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
